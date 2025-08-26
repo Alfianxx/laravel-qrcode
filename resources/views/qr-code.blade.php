@@ -28,6 +28,65 @@
         </button>
     </form>
 
+    {{-- display qr code --}}
+    {{-- @if (Session::has('qrCode'))
+        <div class="mt-10 flex justify-center">
+            {!! Session::get('qrCode') !!}
+            
+        </div>
+        
+    @endif --}}
+
+
+{{-- display qr code --}}
+
+@if(Session::has('qrCode'))
+    <div class="mt-10 flex flex-col items-center">
+        {{-- Tampilkan QR code SVG --}}
+        <div id="qr-container">{!! Session::get('qrCode') !!}</div>
+
+        {{-- Tombol download PNG --}}
+        <button id="downloadPngBtn"
+                class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+            Download QR Code (PNG)
+        </button>
+    </div>
+@endif
+
+{{-- untuk konvert svg ke jpg lewat frontend/javascript --}}
+<script>
+document.getElementById('downloadPngBtn').addEventListener('click', function() {
+    const svgElement = document.querySelector('#qr-container svg');
+
+    const canvas = document.createElement('canvas');
+    const bbox = svgElement.getBBox();
+    canvas.width = bbox.width;
+    canvas.height = bbox.height;
+    const ctx = canvas.getContext('2d');
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const img = new Image();
+    const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svgBlob);
+
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+
+        const pngUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = pngUrl;
+        link.download = 'qrcode.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    img.src = url;
+});
+</script>
+
+
 </body>
 </html>
 
