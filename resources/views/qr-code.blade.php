@@ -37,7 +37,6 @@
         
     @endif --}}
 
-
 {{-- display qr code --}}
 
 @if(Session::has('qrCode'))

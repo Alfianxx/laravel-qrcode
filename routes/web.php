@@ -4,7 +4,7 @@ use App\Http\Controllers\QRCodeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('qr-code');
 });
 
 Route::controller(QRCodeController::class)->group(function () {
