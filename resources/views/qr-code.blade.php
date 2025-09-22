@@ -13,10 +13,10 @@
     <form method="POST" action="{{ route('generate-qr-code') }}" 
           class="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-4 mt-10">
         @csrf
-        <h2 class="text-2xl font-bold text-gray-700 text-center">Generate QR Code</h2>
+        <h2 class="text-2xl font-bold text-gray-700 text-center">Membuat QR Code</h2>
 
         <div>
-            <label for="data" class="block text-sm font-medium text-gray-600 mb-1">Enter Data for QR Code:</label>
+            <label for="data" class="block text-sm font-medium text-gray-600 mb-1">Masukkan Data Untuk QR Code:</label>
             <input type="text" id="data" name="data" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" 
                 placeholder="Masukkan teks atau URL">
@@ -24,7 +24,7 @@
 
         <button type="submit" 
             class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:outline-none transition duration-200">
-            Generate QR Code
+            Buat QR Code
         </button>
     </form>
 
