@@ -47,14 +47,15 @@ class QRCodeController extends Controller
     public function generateQrCode(Request $request)
     {
         $request->validate([
-            'data' => 'required|string|max:500'
-        ]);
+        'data' => 'required|string'
+    ]);
 
-        $data = $request->input('data');
-
-        $qrCode = QrCode::size(200)->errorCorrection('L')->generate($data);
-
-        return back()->with('qrCode', $qrCode);
+    $data = $request->input('data');
+    $qrCode = QrCode::size(200)->errorCorrection('L')->generate($data);
+    
+    dd(strlen($data), $qrCode); // tambah ini sementara
+    
+    return back()->with('qrCode', $qrCode);
     }
 }
 
