@@ -11,35 +11,50 @@ use Illuminate\Support\Facades\Storage;
 class QRCodeController extends Controller
 {
     //
-    public function create() : View
+    public function create(): View
     {
         return view('qr-code');
     }
 
-    public function generateQrCode(Request $request) 
-    {
+    // public function generateQrCode(Request $request) 
+    // {
 
+    //     $request->validate([
+    //         'data' => 'required|string'
+    //     ]);
+
+    //     $data = $request->input('data');
+
+    //     // Generate QR code SVG
+    //     $qrCode = QrCode::size(300)->generate($data);
+
+    //     // Kirim QR code ke view
+    //     return back()->with('qrCode', $qrCode);
+
+
+    //     // if ($request->data) {
+    //     //     $qrCode = QrCode::size(150)->generate($request->data);
+    //     //     return back()->with('qrCode', $qrCode);
+
+    //     // }
+
+
+
+
+    // }
+
+    //coba fungsi claude
+    public function generateQrCode(Request $request)
+    {
         $request->validate([
-            'data' => 'required|string'
+            'data' => 'required|string|max:500'
         ]);
 
         $data = $request->input('data');
 
-        // Generate QR code SVG
-        $qrCode = QrCode::size(300)->generate($data);
+        $qrCode = QrCode::size(200)->errorCorrection('L')->generate($data);
 
-        // Kirim QR code ke view
         return back()->with('qrCode', $qrCode);
-
-
-        // if ($request->data) {
-        //     $qrCode = QrCode::size(150)->generate($request->data);
-        //     return back()->with('qrCode', $qrCode);
-
-        // }
-
-
-
     }
 }
 
